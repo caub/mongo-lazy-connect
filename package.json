@@ -1,6 +1,6 @@
 {
   "name": "mongo-connect-sync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MongoClient.connect synchronous alternative",
   "main": "index.js",
   "scripts": {
