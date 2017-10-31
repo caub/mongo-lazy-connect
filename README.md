@@ -10,8 +10,10 @@ const connectSync = require('mongo-connect-sync');
 const db = connectSync('mongodb://localhost:27017/connect-sync-test');
 
 db.foo.insertOne({bar: 2}).then(() => {
-	db.foo.findOne({}).then(console.log);
+	db.foo.find({}).limit(5).toArray().then(console.log);
 });
+
+// db.connect is a special property, a Promise returning the db
 ```
 
 is equivalent to:
@@ -22,7 +24,7 @@ const MongoClient = require('mongodb');
 MongoClient.connect('mongodb://localhost:27017/connect-sync-test')
 	.then(db => {
 		db.collection('foo').insertOne({bar: 2}).then(() => {
-			db.collection('foo').findOne({}).then(console.log);
+			db.collection('foo').find({}).limit(5).toArray().then(console.log);
 		});
 	});
 ```

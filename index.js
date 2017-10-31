@@ -11,7 +11,7 @@ module.exports = opts => {
 
 	return new Proxy(NULL, {
 		get(_, collName) {
-			if (collName === '_wait') {
+			if (collName === 'connect') {
 				return new Proxy(() => {}, {
 					get() {
 						return dbPromise;
@@ -28,7 +28,7 @@ module.exports = opts => {
 			return db ? db.collection(collName) : new Proxy(NULL, {
 				get(_, funcName) {
 					if (funcName === 'find') {
-						throw new Error('for calling .find initially, you need to call await ._wait function first');
+						throw new Error('for calling .find initially, you need to await .connect function first');
 					}
 					return new Proxy(() => {}, {
 						async apply(_, thisArg, args) {
