@@ -1,0 +1,35 @@
+{
+  "name": "mongo-connect-sync",
+  "version": "1.0.0",
+  "description": "MongoClient.connect synchronous alternative",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha --exit",
+    "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caub/mongo-connect-sync.git"
+  },
+  "keywords": [
+    "mongodb",
+    "pool"
+  ],
+  "engines": {
+    "node": "8"
+  },
+  "author": "caub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caub/mongo-connect-sync/issues"
+  },
+  "homepage": "https://github.com/caub/mongo-connect-sync#readme",
+  "devDependencies": {
+    "codecov": "^3.0.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1"
+  },
+  "dependencies": {
+    "mongodb": "^2.2.33"
+  }
+}
