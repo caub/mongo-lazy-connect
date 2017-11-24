@@ -1,8 +1,9 @@
 {
   "name": "mongo-connect-sync",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MongoClient.connect synchronous alternative",
   "main": "index.js",
+  "files": ["index.js"],
   "scripts": {
     "test": "nyc mocha --exit",
     "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
