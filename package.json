@@ -1,14 +1,14 @@
 {
   "name": "mongo-connect-sync",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MongoClient.connect synchronous alternative",
   "main": "index.js",
   "files": [
     "index.js"
   ],
   "scripts": {
-    "test": "nyc jest",
-    "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
+    "test": "jest --coverage",
+    "coverage": "jest --coverage && codecov"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,7 @@
   "homepage": "https://github.com/caub/mongo-connect-sync#readme",
   "devDependencies": {
     "codecov": "^3.0.0",
-    "mocha": "^4.0.1",
-    "nyc": "^11.2.1"
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "jest": "^21.2.1",

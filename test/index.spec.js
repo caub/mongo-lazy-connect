@@ -1,6 +1,20 @@
 const assert = require('assert');
 const db = require('..')('mongodb://localhost:27017/connect-sync-test');
 
+if (!global.it) { // quick testing without jest, can be removed
+	let p = Promise.resolve();
+	global.it = (desc, cb) => {
+		p = p.then(() => {
+			console.log(desc);
+			return cb();
+		})
+	};
+	global.afterAll = cb => setImmediate(async () => {
+		await p;
+		await cb();
+	})
+}
+
 afterAll(() => db.close());
 
 it('should work with basic collection methods', async () => {
