@@ -2,18 +2,15 @@
 [![build status][travis-image]][travis-url]
 [![coverage status][codecov-image]][codecov-url]
 
-Similarly to other DBs, let's allow a synchronous access to the MongoDB driver pool
+Similarly to other DBs, let's allow a "synchronous" access to the MongoDB driver pool
 
 ```js
-const connectSync = require('mongo-connect-sync');
+const db = require('mongo-connect-sync')('mongodb://localhost:27017/connect-sync-test');
 
-const db = connectSync('mongodb://localhost:27017/connect-sync-test');
-
-db.foo.insertOne({bar: 2}).then(() => {
-	db.foo.find({}).limit(5).toArray().then(console.log);
+const coll = db.collection('foo');
+coll.insertOne({bar: 2}).then(() => {
+	coll.find({}).limit(5).toArray().then(console.log);
 });
-
-// db.connect is a special property, a Promise returning the db
 ```
 
 is equivalent to:
@@ -23,8 +20,9 @@ const MongoClient = require('mongodb');
 
 MongoClient.connect('mongodb://localhost:27017/connect-sync-test')
 	.then(db => {
-		db.collection('foo').insertOne({bar: 2}).then(() => {
-			db.collection('foo').find({}).limit(5).toArray().then(console.log);
+    const coll = db.collection('foo');
+		coll.insertOne({bar: 2}).then(() => {
+			coll.find({}).limit(5).toArray().then(console.log);
 		});
 	});
 ```

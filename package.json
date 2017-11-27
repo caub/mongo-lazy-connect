@@ -1,11 +1,13 @@
 {
   "name": "mongo-connect-sync",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "MongoClient.connect synchronous alternative",
   "main": "index.js",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "scripts": {
-    "test": "nyc mocha --exit",
+    "test": "nyc jest",
     "coverage": "nyc report --reporter=lcov > coverage.lcov && codecov"
   },
   "repository": {
@@ -31,6 +33,7 @@
     "nyc": "^11.2.1"
   },
   "dependencies": {
+    "jest": "^21.2.1",
     "mongodb": "^2.2.33"
   }
 }
