@@ -5,47 +5,49 @@ const NULL = Object.freeze(Object.create(null));
 module.exports = opts => {
 
 	let db;
-	const dbPromise = MongoClient.connect(opts).then(_db => {
-		return db = _db;
-	});
+
+	const open = async () => {
+		return db || MongoClient.connect(opts).then(_db => {
+			return db = _db;
+		});
+	};
 
 	return new Proxy(NULL, {
 		get(_, name) {
 			if (name === 'collection') {
-				return new Proxy(() => {}, {
-					apply(_, _thisArg, args) {
-						// fallback to a proxy to relay promises (except .find that returns a Stream), when db is not set yet
-						return db ? db.collection(args[0]) : new Proxy(NULL, {
-							get(_, funcName) {
-								const collName = args[0];
-								if (funcName === 'find') {
-									throw new Error('for calling collection.find initially, you need to await db.open method first');
-								}
-								return new Proxy(() => {}, {
-									async apply(_, _thisArg, args) {
-										db = await dbPromise;
-										const coll = db.collection(collName);
-										return Promise.resolve(coll[funcName](...args));
+				return collName => db ? db.collection(collName) : new Proxy(NULL, {
+					get(_, funcName) {
+						if (funcName === 'find') {
+							const chain = (calls = []) => new Proxy(NULL, {
+								get(_, name) {
+									if (name === 'toArray' || name === 'then' || typeof name !== 'string') {
+										return async () => {
+											db = await open();
+											const coll = db.collection(collName);
+											return calls.reduce((c, { name, args }) => c[name](...args), coll).toArray();
+										};
 									}
-								});
-							}
-						});
+									return (...args) => chain(calls.concat({ name, args }));
+								}
+							});
+							return (...args) => chain([{ name: 'find', args }]);
+						}
+						return async (...args) => {
+							db = await open();
+							const coll = db.collection(collName);
+							return Promise.resolve(coll[funcName](...args));
+						};
 					}
 				});
 			}
 
 			if (name === 'open') {
-				return new Proxy(() => {}, {
-					apply() {
-						return dbPromise;
-					}
-				});
+				return open;
 			}
 			if (name === 'close') {
-				return new Proxy(() => {}, {
-					apply() {
-						return dbPromise.then(db => db.close());
-					}
+				return () => open().then(_db => {
+					db = null;
+					return _db.close();
 				});
 			}
 

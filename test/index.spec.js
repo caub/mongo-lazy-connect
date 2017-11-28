@@ -17,6 +17,19 @@ if (!global.it) { // quick testing without jest, can be removed
 
 afterAll(() => db.close());
 
+it('should work with .find initially', async () => {
+	const docs = await db.collection('foo').find({}).limit(5).toArray();
+	assert(Array.isArray(docs));
+});
+
+it('should close then reopen automatically (by calling .open or not) with any query', async () => {
+	await db.close();
+	const docs = await db.collection('foo').find({}).toArray();
+	assert(Array.isArray(docs));
+
+	await db.open();
+});
+
 it('should work with basic collection methods', async () => {
 	await db.collection('foo').deleteMany();
 	await db.collection('foo').insertOne({bar: 2});
@@ -33,16 +46,4 @@ it(`should work with .find when it's not the first call`, async () => {
 	assert(Array.isArray(docs));
 	assert.equal(docs.length, 1);
 	assert.equal(docs[0].bar, 2);
-});
-
-it('should wait (when called as a prop) and then call .find', async () => {
-	await db.open;
-	const docs = await db.collection('foo').find({}).toArray();
-	assert(Array.isArray(docs));
-});
-
-it('should wait (when called as a function) and then call .find', async () => {
-	await db.open();
-	const docs = await db.collection('foo').find({}).toArray();
-	assert(Array.isArray(docs));
 });

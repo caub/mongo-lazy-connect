@@ -20,7 +20,7 @@ const MongoClient = require('mongodb');
 
 MongoClient.connect('mongodb://localhost:27017/connect-sync-test')
 	.then(db => {
-    const coll = db.collection('foo');
+		const coll = db.collection('foo');
 		coll.insertOne({bar: 2}).then(() => {
 			coll.find({}).limit(5).toArray().then(console.log);
 		});
