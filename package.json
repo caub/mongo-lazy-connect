@@ -1,6 +1,6 @@
 {
   "name": "mongo-connect-sync",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "MongoClient.connect synchronous alternative",
   "main": "index.js",
   "files": [
@@ -19,7 +19,7 @@
     "pool"
   ],
   "engines": {
-    "node": "8"
+    "node": ">=8"
   },
   "author": "caub",
   "license": "ISC",
