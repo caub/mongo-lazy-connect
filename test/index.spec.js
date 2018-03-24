@@ -1,5 +1,5 @@
 const assert = require('assert');
-const db = require('..')('mongodb://localhost:27017/connect-sync-test');
+const db = require('..')('mongodb://localhost:27017/connect-test');
 
 if (!global.it) { // quick testing without jest, can be removed
 	let p = Promise.resolve();
@@ -9,10 +9,7 @@ if (!global.it) { // quick testing without jest, can be removed
 			return cb();
 		})
 	};
-	global.afterAll = cb => setImmediate(async () => {
-		await p;
-		await cb();
-	})
+	global.afterAll = cb => setImmediate(() => p.finally(cb));
 }
 
 afterAll(() => db.close());
@@ -22,12 +19,12 @@ it('should work with .find initially', async () => {
 	assert(Array.isArray(docs));
 });
 
-it('should close then reopen automatically (by calling .open or not) with any query', async () => {
+it('should close then reconnect automatically (by calling .connect or not) with any query', async () => {
 	await db.close();
 	const docs = await db.collection('foo').find({}).toArray();
 	assert(Array.isArray(docs));
 
-	await db.open();
+	await db.connect();
 });
 
 it('should work with basic collection methods', async () => {

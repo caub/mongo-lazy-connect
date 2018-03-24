@@ -1,7 +1,7 @@
 {
-  "name": "mongo-connect-sync",
-  "version": "1.2.2",
-  "description": "MongoClient.connect synchronous alternative",
+  "name": "mongo-lazy-connect",
+  "version": "2.0.0",
+  "description": "MongoClient.connect alternative",
   "main": "index.js",
   "files": [
     "index.js"
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/caub/mongo-connect-sync.git"
+    "url": "git+https://github.com/caub/mongo-lazy-connect.git"
   },
   "keywords": [
     "mongodb",
@@ -24,17 +24,17 @@
   "author": "caub",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/caub/mongo-connect-sync/issues"
+    "url": "https://github.com/caub/mongo-lazy-connect/issues"
   },
-  "homepage": "https://github.com/caub/mongo-connect-sync#readme",
+  "homepage": "https://github.com/caub/mongo-lazy-connect#readme",
   "devDependencies": {
     "codecov": "^3.0.0",
-    "jest": "^21.2.1"
+    "jest": "^22.4.3"
   },
   "peerDependencies": {
-    "mongodb": "^2.2.33"
+    "mongodb": "^3.0.5"
   },
   "dependencies": {
-    "mongodb": "^2.2.33"
+    "mongodb": "^3.0.5"
   }
 }
