@@ -1,12 +1,13 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "files": [
     "index.js"
   ],
   "scripts": {
+    "mongo": "docker run --name mongo -p 27017:27017 -v ~/mongo-data:/data/db mongo || docker start -ia mongo",
     "test": "jest --coverage",
     "coverage": "jest --coverage && codecov"
   },

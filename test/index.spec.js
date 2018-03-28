@@ -21,6 +21,7 @@ it('should work with .find initially', async () => {
 
 it('should close then reconnect automatically (by calling .connect or not) with any query', async () => {
 	await db.close();
+	await db.close();
 	const docs = await db.collection('foo').find({}).toArray();
 	assert(Array.isArray(docs));
 
@@ -43,4 +44,9 @@ it(`should work with .find when it's not the first call`, async () => {
 	assert(Array.isArray(docs));
 	assert.equal(docs.length, 1);
 	assert.equal(docs[0].bar, 2);
+});
+
+it('should call other Db methods', async () => {
+	const stats = await db.stats();
+	assert.equal(stats.db, 'connect-test');
 });

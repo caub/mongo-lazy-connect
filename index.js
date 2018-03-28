@@ -1,5 +1,5 @@
+const {URL} = require('url');
 const mongo = require('mongodb');
-const { URL } = require('url');
 
 const NULL = Object.freeze(Object.create(null));
 
@@ -53,7 +53,7 @@ module.exports = (url, opts) => {
 						return async (...args) => {
 							client = await connect();
 							const coll = client.db(dbName).collection(collName);
-							return Promise.resolve(coll[funcName](...args));
+							return coll[funcName](...args);
 						};
 					}
 				});
@@ -66,10 +66,15 @@ module.exports = (url, opts) => {
 				return close;
 			}
 
-			if (client) {
-				return client.db(dbName)[name];
-			}
-			throw new Error('for calling other Db methods (http://mongodb.github.io/node-mongodb-native/3.0/api/Db.html) initially, you need to implement them by contributing to this project!')
+			return async (...args) => {
+				if (client) {
+					client = await connect();
+				}
+				if (!client.db(dbName)[name]) {
+					throw new Error(`This Db method doesn't exists, valid ones are: http://mongodb.github.io/node-mongodb-native/3.0/api/Db.html`)
+				}
+				return client.db(dbName)[name](...args);
+			};
 		}
 	});
 };

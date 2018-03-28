@@ -27,9 +27,9 @@ mongo('mongodb://localhost:27017/connect-test')
 	});
 ```
 
-[npm-image]: https://img.shields.io/npm/v/mongo-lazy-connect.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/mongo-lazy-connect.svg?style=flat-square&maxAge=86400
 [npm-url]: https://www.npmjs.com/package/mongo-lazy-connect
-[travis-image]: https://img.shields.io/travis/caub/mongo-lazy-connect.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/caub/mongo-lazy-connect.svg?style=flat-square&maxAge=86400
 [travis-url]: https://travis-ci.org/caub/mongo-lazy-connect
-[codecov-image]: https://img.shields.io/codecov/c/github/caub/mongo-lazy-connect.svg?style=flat-square
+[codecov-image]: https://img.shields.io/codecov/c/github/caub/mongo-lazy-connect.svg?style=flat-square&maxAge=86400
 [codecov-url]: https://codecov.io/gh/caub/mongo-lazy-connect
