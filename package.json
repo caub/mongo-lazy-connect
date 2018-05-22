@@ -1,13 +1,13 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "files": [
     "index.js"
   ],
   "scripts": {
-    "mongo": "docker run --name mongo -p 27017:27017 -v ~/mongo-data:/data/db mongo || docker start -ia mongo",
+    "mongo": "docker run --rm -p 27017:27017 -v ~/mongo-data:/data/db mongo",
     "test": "jest --coverage",
     "coverage": "jest --coverage && codecov"
   },
@@ -29,13 +29,13 @@
   },
   "homepage": "https://github.com/caub/mongo-lazy-connect#readme",
   "devDependencies": {
-    "codecov": "^3.0.0",
-    "jest": "^22.4.3"
+    "codecov": "^3.0.2",
+    "jest": "^22.4.4"
   },
   "peerDependencies": {
-    "mongodb": "^3.0.5"
+    "mongodb": ">=3"
   },
   "dependencies": {
-    "mongodb": "^3.0.5"
+    "mongodb": "^3.0.8"
   }
 }
