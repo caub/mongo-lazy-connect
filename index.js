@@ -14,13 +14,13 @@ module.exports = (url, opts) => {
 	let dbName;
 	try {
 		dbName = new URL(url).pathname.slice(1);
-	} catch(e) {
+	} catch (e) {
 		throw new Error('We expect the first argument to be a connection string url')
 	}
 
 	let close = () => Promise.resolve();
 	let connect = async () => {
-		return client || mongo(url, opts).then(_client => {
+		return client || mongo(url, {useNewUrlParser: true, ...opts}).then(_client => {
 			client = _client;
 			close = () => {
 				client = null;
@@ -32,6 +32,7 @@ module.exports = (url, opts) => {
 
 	return new Proxy(NULL, {
 		get(_, name) {
+			if (name === 'client') return client;
 			if (name === 'collection') {
 				return collName => client ? client.db(dbName).collection(collName) : new Proxy(NULL, {
 					get(_, funcName) {
@@ -42,13 +43,13 @@ module.exports = (url, opts) => {
 										return async () => {
 											client = await connect();
 											const coll = client.db(dbName).collection(collName);
-											return calls.reduce((c, { name, args }) => c[name](...args), coll).toArray();
+											return calls.reduce((c, {name, args}) => c[name](...args), coll).toArray();
 										};
 									}
-									return (...args) => chain(calls.concat({ name, args }));
+									return (...args) => chain(calls.concat({name, args}));
 								}
 							});
-							return (...args) => chain([{ name: 'find', args }]);
+							return (...args) => chain([{name: 'find', args}]);
 						}
 						return async (...args) => {
 							client = await connect();
