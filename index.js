@@ -43,12 +43,13 @@ module.exports = (url, opts) => {
 										return async () => {
 											client = await connect();
 											const coll = client.db(dbName).collection(collName);
-											return calls.reduce((c, {name, args}) => c[name](...args), coll).toArray();
+											return calls.reduce((c, {name, args}) => typeof c[name] === 'function' ? c[name](...args) : c, coll).toArray();
 										};
 									}
 									return (...args) => chain(calls.concat({name, args}));
 								}
 							});
+
 							return (...args) => chain([{name: 'find', args}]);
 						}
 						return async (...args) => {

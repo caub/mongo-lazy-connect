@@ -18,7 +18,7 @@ is equivalent to:
 ```js
 const mongo = require('mongodb');
 
-mongo('mongodb://localhost:27017/connect-test')
+mongo('mongodb://localhost:27017')
 	.then(client => {
 		const coll = client.db('connect-test').collection('foo');
 		coll.insertOne({bar: 2}).then(() => {

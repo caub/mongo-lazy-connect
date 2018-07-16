@@ -1,6 +1,6 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "scripts": {
@@ -11,16 +11,14 @@
   "repository": "github:caub/mongo-lazy-connect",
   "keywords": [
     "mongodb",
-    "pool"
+    "pool",
+    "promise"
   ],
   "engines": {
     "node": ">=8"
   },
   "author": "caub",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/caub/mongo-lazy-connect/issues"
-  },
   "homepage": "https://github.com/caub/mongo-lazy-connect#readme",
   "devDependencies": {
     "@types/mongodb": "^3.1.1",
