@@ -1,12 +1,11 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "scripts": {
-    "mongo": "docker run --rm -p 27017:27017 -v ~/mongo-data:/data/db mongo:3",
-    "test": "jest --coverage --detectOpenHandles --forceExit",
-    "coverage": "jest --coverage && codecov"
+    "mongo": "docker run --rm -p 27017:27017 -v ~/mongo-data:/data/db mongo:4",
+    "test": "jest --coverage --detectOpenHandles --forceExit"
   },
   "repository": "github:caub/mongo-lazy-connect",
   "keywords": [
@@ -21,15 +20,15 @@
   "license": "ISC",
   "homepage": "https://github.com/caub/mongo-lazy-connect#readme",
   "devDependencies": {
-    "@types/mongodb": "^3.1.1",
-    "@types/node": "^10.5.2",
-    "codecov": "^3.0.4",
-    "jest": "^23.4.0"
+    "@types/mongodb": "^3.1.8",
+    "@types/node": "^10.10.2",
+    "codecov": "^3.1.0",
+    "jest": "^23.6.0"
   },
   "peerDependencies": {
     "mongodb": ">=3"
   },
   "dependencies": {
-    "mongodb": "^3.1.1"
+    "mongodb": "^3.1.6"
   }
 }

@@ -18,4 +18,4 @@ addons:
       - mongodb-org-server
       - mongodb-org-shell
 
-after_success: npm run coverage
+after_success: npx jest --coverage && npx codecov
