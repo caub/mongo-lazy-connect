@@ -5,6 +5,9 @@ node_js: '10'
 services:
   - mongodb
 
+before_install:
+  - "mongo admin --eval 'db.createUser({user: \"mlc\", pwd: \"hunter2\", roles: [{role: \"root\", db: \"admin\"}]})'"
+
 cache:
   directories:
     - node_modules

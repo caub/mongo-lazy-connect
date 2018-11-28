@@ -1,5 +1,6 @@
 const assert = require('assert');
-const db = require('..')('mongodb://localhost:27017/connect-test');
+const mongoLazy = require('..');
+const db = mongoLazy('mongodb://localhost:27017/connect-test');
 
 if (!global.it) { // quick testing without jest, can be removed
 	let p = Promise.resolve();
@@ -49,4 +50,13 @@ it(`should work with .find when it's not the first call`, async () => {
 it('should call other Db methods', async () => {
 	const stats = await db.stats();
 	assert.equal(stats.db, 'connect-test');
+});
+
+it('should expose client', async () => {
+	const otherDb = mongoLazy('mongodb://mlc:hunter2@localhost:27017/connect-test', {authSource: 'admin'});
+	const docs = await otherDb.collection('foo').find({}).limit(5).toArray();
+	assert.equal(docs.length, 1);
+	const otherDb2 = otherDb.client.db('connect-test2'); // switch to another empty db
+	const docs2 = await otherDb2.collection('foo').find({}).limit(5).toArray();
+	assert.equal(docs2.length, 0);
 });

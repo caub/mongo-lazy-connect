@@ -27,6 +27,12 @@ mongo('mongodb://localhost:27017')
 	});
 ```
 
+Note: for local testing, add a user on the DB
+```sh
+docker exec mongo-lazy-connect mongo admin --eval 'db.createUser({user: "mlc", pwd: "hunter2", roles: [{role: "root", db: "admin"}]})'
+```
+
+
 [npm-image]: https://img.shields.io/npm/v/mongo-lazy-connect.svg?style=flat-square&maxAge=86400
 [npm-url]: https://www.npmjs.com/package/mongo-lazy-connect
 [travis-image]: https://img.shields.io/travis/caub/mongo-lazy-connect.svg?style=flat-square&maxAge=86400
