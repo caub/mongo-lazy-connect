@@ -1,6 +1,6 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "scripts": {
