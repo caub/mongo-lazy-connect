@@ -1,6 +1,6 @@
 {
   "name": "mongo-lazy-connect",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "MongoClient.connect alternative",
   "main": "index.js",
   "scripts": {
@@ -20,15 +20,15 @@
   "license": "ISC",
   "homepage": "https://github.com/caub/mongo-lazy-connect#readme",
   "devDependencies": {
-    "@types/mongodb": "^3.1.14",
-    "@types/node": "^10.12.10",
-    "codecov": "^3.1.0",
-    "jest": "^23.6.0"
+    "@types/mongodb": "^3.3.6",
+    "@types/node": "^12.11.1",
+    "codecov": "^3.6.1",
+    "jest": "^24.9.0"
   },
   "peerDependencies": {
-    "mongodb": ">=3"
+    "mongodb": "^3.3.3"
   },
   "dependencies": {
-    "mongodb": "^3.1.10"
+    "mongodb": "^3.3.3"
   }
 }
